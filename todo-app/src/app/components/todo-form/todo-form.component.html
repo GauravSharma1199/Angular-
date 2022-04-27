@@ -1,0 +1,11 @@
+<div class="input-group input-group-sm mb-4 mt-2" style="height: 50px">
+  <span class="input-group-text" id="inputGroup-sizing-sm">Enter a todo</span>
+  <input
+    type="text"
+    class="form-control"
+    aria-label="Sizing example input"
+    aria-describedby="inputGroup-sizing-sm"
+    [(ngModel)]="todoTitle"
+  />
+  <button (click)="handleAdd()" class="btn btn-primary">Add Todo</button>
+</div>
