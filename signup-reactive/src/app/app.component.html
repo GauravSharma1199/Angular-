@@ -90,17 +90,17 @@
                   'is-invalid': submitted && h.password.errors,
                   'is-valid': h.password.valid
                 }"
+                (keyup)="checkValidity(h.confirmPassword)"
                 type="password"
                 class="form-control"
               />
               <div
                 *ngIf="
-                  (h.password.touched && h.password.errors) ||
-                  (h.password.errors && submitted)
+                  (h.password.errors )
                 "
                 class="text-warning fs-10"
               >
-                <div *ngIf="h.password.errors.required">
+                <div *ngIf="h.password.errors.required && submitted">
                   Password is required
                 </div>
                 <div *ngIf="h.password.errors.minlength">
@@ -116,27 +116,32 @@
                 [ngClass]="{
                   'is-invalid': submitted && h.confirmPassword.errors
                 }"
+                (keyup)="checkValidity(h.confirmPassword)"
                 type="password"
                 class="form-control"
               />
 
               <div
                 *ngIf="
-                  (h.confirmPassword.touched && h.confirmPassword.errors) ||
-                  (h.confirmPassword.errors && submitted)
+                  ( h.confirmPassword.errors)
                 "
                 class="text-warning fs-10"
               >
                 <div *ngIf="h.confirmPassword.errors.required">
                   Confirm Password is required
                 </div>
-                <div *ngIf="h.confirmPassword.errors.mustmatch">
+                <div *ngIf="h.confirmPassword.errors.mustmatch && !h.confirmPassword.pristine">
                   Passwords must match
                 </div>
-               
-                  <!-- <div *ngIf="h.confirmPassword.valid" class="text-success fs-10">*Password matched</div> -->
-                
+
+              
               </div>
+              <div
+              *ngIf="!h.confirmPassword.errors?.mustmatch && !h.confirmPassword.pristine"
+              class="text-success fs-10"
+            >
+              *Password matched
+            </div>
             </div>
           </div>
           <div class="form-group form-check mt-4">

@@ -41,6 +41,15 @@ export class AppComponent implements OnInit {
   get h(){
     return this.registeredForm.controls;
   }
+
+  checkValidity(event: any){
+    console.log("event",event);
+    console.log("errors", event.pristine);
+    
+    console.log("err",event.enabled);
+    
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.registeredForm.invalid) {
