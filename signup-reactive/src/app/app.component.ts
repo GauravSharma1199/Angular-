@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   registeredForm!: FormGroup;
   submitted = false;
+  isPasswordMatched = false;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -25,18 +26,21 @@ export class AppComponent implements OnInit {
     this.registeredForm = this.formBuilder.group(
       {
         firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', Validators.required, Validators.required],
-        password: ['', Validators.required],
+        lastName: [''],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
-        acceptTandC: [false, Validators.required],
+        acceptTandC: [false, Validators.requiredTrue],
       },
       {
-        Validators: passwordChecker('password', 'confirmPassword'),
+        validators: passwordChecker('password', 'confirmPassword'),
       }
     );
   }
 
+  get h(){
+    return this.registeredForm.controls;
+  }
   onSubmit() {
     this.submitted = true;
     if (this.registeredForm.invalid) {
